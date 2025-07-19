@@ -6,7 +6,6 @@ use App\Http\Requests\DeleteBrandRequest;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Models\Brand;
-use App\Models\Country;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
