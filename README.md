@@ -2,6 +2,7 @@
 
 ## How to install
 Run `docker compose up --build`
+_Then the project can be opened in http://localhost:3000_
 
 ## Tech stack
 * Laravel
