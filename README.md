@@ -10,7 +10,18 @@ Run `docker compose up --build`
 * MySQL
 
 ## Additional implementations
-* Backend and frontend are in different containers that will help for the scalability
-* CORS
-* Sanctum
-* Axios
+* Docker
+  * Backend and frontend are in different containers that will help for the scalability
+  * Entrypoint for the backend part
+* Laravel
+  * CORS (`config/cors.php`)
+  * Sanctum - hardcoded token in the `.env` file 
+  * Separated request validations
+  * Laravel mutators
+  * Migrations, seeders, and factories
+  * Middleware - `HandleCors` and `CheckToken`
+* React
+  * Boostrap 
+  * Axios
+  * Redux
+    * Redux toolkit 
