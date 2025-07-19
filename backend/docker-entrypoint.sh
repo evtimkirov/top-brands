@@ -3,6 +3,11 @@
 chown -R www-data:www-data storage bootstrap/cache
 chmod -R 775 storage bootstrap/cache
 
+if [ ! -f ".env" ]; then
+  cp .env.example .env
+  echo "Copied .env.example as .env"
+fi
+
 until php artisan migrate --no-interaction --force; do
   echo "Waiting for MySQL to be ready..."
   sleep 3
