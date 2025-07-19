@@ -4,7 +4,10 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     zip \
     unzip \
+    git \
     && docker-php-ext-install pdo pdo_mysql
+
+COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
 
 RUN a2enmod rewrite
 
@@ -17,10 +20,11 @@ RUN mkdir -p /var/www/storage /var/www/bootstrap/cache \
     && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
+COPY . /var/www/
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-ENTRYPOINT ["docker-entrypoint.sh"]
-
 WORKDIR /var/www
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["apache2-foreground"]

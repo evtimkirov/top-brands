@@ -8,6 +8,13 @@ if [ ! -f ".env" ]; then
   echo "Copied .env.example as .env"
 fi
 
+if [ ! -f vendor/autoload.php ]; then
+  echo "Running composer install..."
+  composer install --no-interaction --prefer-dist --optimize-autoloader
+fi
+
+php artisan key:generate --force
+
 until php artisan migrate --no-interaction --force; do
   echo "Waiting for MySQL to be ready..."
   sleep 3
