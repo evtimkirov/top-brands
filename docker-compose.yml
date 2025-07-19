@@ -1,0 +1,42 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend:/var/www
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/public
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=top_brands
+      - DB_USERNAME=brand_user
+      - DB_PASSWORD=brand_password
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  db:
+    image: mysql:8.0
+    container_name: top_brands-mysql
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: top_brands
+      MYSQL_USER: brand_user
+      MYSQL_PASSWORD: brand_password
+      MYSQL_ROOT_PASSWORD: brand_password
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
