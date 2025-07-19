@@ -8,4 +8,8 @@ until php artisan migrate --no-interaction --force; do
   sleep 3
 done
 
+# Clear and run the migration and the seeders
+php artisan migrate:fresh --force
+php artisan db:seed --force
+
 exec apache2-foreground
